@@ -45,7 +45,7 @@ class menu extends Component
                 'label' => 'Ticket'
             ],
             [
-                'label' => 'User'
+                'label' => 'Users'
             ]
         ];
     }
