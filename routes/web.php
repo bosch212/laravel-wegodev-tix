@@ -19,10 +19,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'Dashboard\DashboardController@index');
+Route::middleware('auth')->group(function(){
 
-//Users
-Route::get('/dashboard/users', 'Dashboard\UserController@index');
-Route::get('/dashboard/user/edit/{id}', 'Dashboard\UserController@edit');
-Route::post('/dashboard/user/update/{id}', 'Dashboard\UserController@update');
+    Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
+    Route::get('/dashboard/movie', 'Dashboard\MovieController@index')->name('dashboard.movie');
+    Route::get('/dashboard/theater', 'Dashboard\TheaterController@index')->name('dashboard.theater');
+    Route::get('/dashboard/ticket', 'Dashboard\TicketController@index')->name('dashboard.ticket');
+
+    //Users
+    Route::get('/dashboard/users', 'Dashboard\UserController@index')->name('dashboard.users');
+    Route::get('/dashboard/users/edit/{id}', 'Dashboard\UserController@edit')->name('dashboard.user.edit');
+    Route::put('/dashboard/users/update/{id}', 'Dashboard\UserController@update')->name('dashboard.user.update');
+    Route::delete('/dashboard/users/delete/{id}', 'Dashboard\UserController@destroy')->name('dashboard.user.delete');
+
+});
